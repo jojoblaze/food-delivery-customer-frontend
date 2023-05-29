@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merchants-app
+  labels:
+    app: merchants-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: merchants-frontend
+  template:
+    metadata:
+      labels:
+        app: merchants-app
+        service: merchants-frontend
+    spec:
+      containers:
+        - name: merchants-app-container
+          image: merchants-frontend:latest
+          imagePullPolicy: Never  # or IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          # env:
+          #   - name: REACT_APP_API_URL
+          #     value: http://merchants-webapi-service
+          #   - name: REACT_APP_MERCHANT_KEY
+          #     value: 646d246260e60733ad25d50c
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: merchants-app-service
+  labels:
+    app: merchants-app
+    service: merchants-frontend
+spec:
+  type: NodePort
+  ports:
+    - targetPort : 80
+      port: 80
+      nodePort: 30010
+      protocol: TCP
+  selector:
+    app: merchants-app
+    service: merchants-frontend
