@@ -1,6 +1,5 @@
 import 'bulma/css/bulma.min.css';
 import logo from './logo.svg';
-import shoppingCart from './shopping-cart.svg'
 import { Outlet, Link } from "react-router-dom";
 import './App.css';
 
@@ -25,7 +24,7 @@ const App = () => {
 
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
-                <a className="navbar-item">
+                <a className="navbar-item" href="/">
                   Home
                 </a>
 
@@ -36,9 +35,6 @@ const App = () => {
 
 
               <div className="navbar-end">
-                <a className="navbar-item" href="/">
-                  <img src={shoppingCart} alt={'shopping-cart'} width="112" height="28" />
-                </a>
                 <div className="navbar-item">
                   <div className="buttons">
                     <a className="button is-primary">

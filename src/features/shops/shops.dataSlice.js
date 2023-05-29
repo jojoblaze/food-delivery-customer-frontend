@@ -37,22 +37,43 @@ export const ShopsDataSlice = createSlice({
                             if (ao.dishId === dishId) {
                                 return { ...ao, quantity: ao.quantity + quantity || 0 }
                             } else {
-                                return { dishId: dishId, quantity: quantity }
+                                return ao
                             }
-                            // let newActiveOrder = null;
-                            // if (activeOrder === undefined)
-                            //     newActiveOrder = { dishId: dishId, quantity: quantity }
-                            // else
-                            //     newActiveOrder = { ...activeOrder, quantity: activeOrder.quantity + quantity || 0 }
-
-                            // return { ...shop, activeOrders: [...shop.activeOrders || [], newActiveOrder] }
-                            // } else return ao
                         })
                         return { ...shop, activeOrders: [...activeOrders] }
                     } else {
                         return { ...shop, activeOrders: [...shop?.activeOrders || [], { dishId: dishId, quantity: quantity }] }
                     }
                 } else
+                    return shop
+            })
+            state.shops = [...updatedShopWithOrders]
+        },
+        removeDishFromOrder: (state, action) => {
+            const { merchantId, dishId } = action.payload
+
+            const updatedShopWithOrders = state.shops.map(shop => {
+                if (shop.id === merchantId) {
+                    const existingActiveOrder = shop.activeOrders.find(
+                        (ao) => ao.dishId === dishId
+                    );
+                    if (existingActiveOrder.quantity === 1) {
+                        // remove from active orders
+                        const updatedOrders = shop.activeOrders.filter(
+                            (ao) => ao.dishId !== dishId
+                        );
+                        return { ...shop, activeOrders: [...updatedOrders] };
+                    } else {
+                        // update quantity by -1
+                        const updatedOrders = shop.activeOrders.map((ao) => {
+                            if (ao.dishId !== dishId)
+                                return { ...ao, quantity: ao.quantity - 1 };
+                            else return ao;
+                        });
+                        return { ...shop, activeOrders: [...updatedOrders] };
+                    }
+                }
+                else
                     return shop
             })
             state.shops = [...updatedShopWithOrders]
@@ -70,7 +91,7 @@ export const ShopsDataSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addDishToOrder } = ShopsDataSlice.actions
+export const { addDishToOrder, removeDishFromOrder } = ShopsDataSlice.actions
 
 export default ShopsDataSlice.reducer
 

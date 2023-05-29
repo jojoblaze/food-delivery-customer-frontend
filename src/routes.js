@@ -5,6 +5,7 @@ import App from './App';
 import { ShopListHOF } from './components/shop-list-hof';
 import { ShopHOF } from './components/shop-hof/shop-hof';
 import { DishDetail } from './components/dish-detail';
+import { ShopCartHOF } from './components/shop-cart-hof';
 
 
 const routesConfig = [
@@ -28,6 +29,10 @@ const routesConfig = [
         path: 'merchants/:merchantId',
         element: <ShopHOF />,
         // loader: interactiveMasterMapLoader
+      },
+      {
+        path: 'merchants/:merchantId/cart',
+        element: <ShopCartHOF />,
       },
       {
         path: 'merchants/:merchantId/menu/:dishId',
