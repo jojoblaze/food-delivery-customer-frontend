@@ -73,12 +73,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Build Docker image
 ```
-docker build -t merchants-frontend .
+docker build -t customers-frontend .
 ```
 
 Push Docker application image into Kind cluster
 ```
-kind load docker-image merchants-frontend:latest
+kind load docker-image customers-frontend:latest
 ```
 
 Deploy on Kubernetes
