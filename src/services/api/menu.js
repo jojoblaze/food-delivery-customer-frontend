@@ -100,16 +100,16 @@ export const getDish = async (dishId) => {
     });
 }
 
-export const postDish = async (dish) => {
+export const postOrder = async (order) => {
     return new Promise((resolve, reject) => {
-        fetch(`${API_URL}/merchants/${MERCHANT_KEY}/menu`
+        fetch(`${API_URL}/merchants/${MERCHANT_KEY}/orders`
             , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(dish)
+                body: JSON.stringify(order)
             }
         )
         .then(function (response) {

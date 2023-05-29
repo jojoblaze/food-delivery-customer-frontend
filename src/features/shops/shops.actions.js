@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getDish, getDishes, postDish, putDish, deleteDish, getShops, getShop } from "../../services/api/menu";
+import { getDish, getDishes, postOrder, putDish, deleteDish, getShops, getShop } from "../../services/api/menu";
 
 
 const loadShops = async (_, thunkAPI) => {
@@ -56,55 +56,14 @@ export const fetchShop_fulfilled = (state, action) => {
     state.shops = [...updatedShops]
 }
 
-/*
-const loadDishes = async (_, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-        const response = await getDishes();
-        console.log("dishes:", response);
-        return response;
-    } catch (error) {
-        return rejectWithValue(error.message);
-    }
-}
-export const fetchDishes = createAsyncThunk('menu/dishes/getall', loadDishes)
 
-export const fetchDishes_fulfilled = (state, action) => {
-    console.log('fetchDishes action:', action, 'fullfilled payload:', action.payload);
-    state.dishes = [...action.payload]
-}
-
-const loadDish = async (_, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-        const response = await getDish(_);
-        console.log("dishes:", response);
-        return response;
-    } catch (error) {
-        return rejectWithValue(error.message);
-    }
-}
-export const fetchDish = createAsyncThunk('menu/dishes/get', loadDish)
-
-export const fetchDish_fulfilled = (state, action) => {
-    console.log('fetchDishes action:', action, 'fullfilled payload:', action.payload);
-    const updatedMenu = state.dishes.map(dish => {
-        if (dish.id === action.payload.id) {
-            return action.payload
-        } else {
-            return dish
-        }
-    })
-    state.dishes = [...updatedMenu]
-}
-
-export const createDish = createAsyncThunk(
-    'menu/dishes/new',
+export const createOrder = createAsyncThunk(
+    'menu/orders/new',
     // The payload creator receives the partial `{title, content, user}` object
     async (_, thunkAPI) => {
         const { rejectWithValue } = thunkAPI;
         try {
-            const response = await postDish(_.dish)
+            const response = await postOrder(_)
             // The response includes the complete post object, including unique ID
             return response
         } catch (error) {
@@ -112,12 +71,12 @@ export const createDish = createAsyncThunk(
         }
     }
 )
-export const createDish_fulfilled = (state, action) => {
+export const createOrder_fulfilled = (state, action) => {
     if (action.payload.success === true)
-        state.dishes = [...state.dishes, action.payload.data]
+        state.activeOrders = [...state.activeOrders, action.payload.data]
 }
 
-
+/*
 export const updateDish = createAsyncThunk(
     'menu/dishes/update',
     // The payload creator receives the partial `{title, content, user}` object
