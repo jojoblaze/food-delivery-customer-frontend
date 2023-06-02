@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: merchants-app
+  name: customer-app
   labels:
-    app: merchants-app
+    app: customer-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      service: merchants-frontend
+      service: customer-frontend
   template:
     metadata:
       labels:
-        app: merchants-app
-        service: merchants-frontend
+        app: customer-app
+        service: customer-frontend
     spec:
       containers:
-        - name: merchants-app-container
-          image: merchants-frontend:latest
+        - name: customer-app-container
+          image: customer-frontend:latest
           imagePullPolicy: Never  # or IfNotPresent
           ports:
             - containerPort: 80
@@ -31,17 +31,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: merchants-app-service
+  name: customer-app-service
   labels:
-    app: merchants-app
-    service: merchants-frontend
+    app: customer-app
+    service: customer-frontend
 spec:
   type: NodePort
   ports:
     - targetPort : 80
       port: 80
-      nodePort: 30010
+      nodePort: 30011
       protocol: TCP
   selector:
-    app: merchants-app
-    service: merchants-frontend
+    app: customer-app
+    service: customer-frontend

@@ -85,7 +85,7 @@ export const ShopCartHOF = () => {
         total: total
       },
       dishes: [...shop.activeOrders],
-      deliveryInfo: {}
+      deliveryInfos: {}
     }
     console.log("submitting order", order)
     dispatch(createOrder(order))
