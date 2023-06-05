@@ -65,6 +65,7 @@ export const createOrder = createAsyncThunk(
         try {
             const response = await postOrder(_)
             // The response includes the complete post object, including unique ID
+            window.location.replace(response.data)
             return response
         } catch (error) {
             return rejectWithValue(error.message);

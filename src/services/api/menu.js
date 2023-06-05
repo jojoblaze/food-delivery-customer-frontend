@@ -102,7 +102,7 @@ export const getDish = async (dishId) => {
 
 export const postOrder = async (order) => {
     return new Promise((resolve, reject) => {
-        fetch(`${API_URL}/merchants/${MERCHANT_KEY}/orders`
+        fetch(`${API_URL}/checkout/${MERCHANT_KEY}/orders`
             , {
                 method: 'POST',
                 headers: {
@@ -113,7 +113,7 @@ export const postOrder = async (order) => {
             }
         )
         .then(function (response) {
-            // console.log(response)
+            // console.log("order response", response)
             return response.json();        })
         .then(function (myJson) {
             // console.log(myJson);

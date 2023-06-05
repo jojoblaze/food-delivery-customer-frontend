@@ -39,6 +39,14 @@ const routesConfig = [
         element: <><DishDetail /></>,
         // loader: interactiveMasterMapLoader
       },
+      {
+        path: 'payment_succeeded',
+        element: <><h1>checkout ok</h1></>
+      },
+      {
+        path: 'checkout_failed',
+        element: <><h1>checkout ko</h1></>
+      },
     ],
   },
 ];
