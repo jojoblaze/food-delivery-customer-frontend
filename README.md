@@ -69,16 +69,16 @@ Deploy on Kubernetes
 kubectl create -f manifest.yml
 ```
 
-## Stripe Cheats
+## Stripe cheats
 
 Use the followings fake credit cards to test payment gateway transactions.
 
 **Credit Cards**
 
-|Number|Description|
-|---|---|
-|4242 4242 4242 4242|Succeeds and immediately processes the payment.|
-|4000 0000 0000 3220|Complete 3D Secure 2 authentication for a successful payment.|
-|4000 0000 0000 9995|Always fails with a decline code of insufficient_funds.|
+|Number             |Description                                                    |
+|-------------------|---------------------------------------------------------------|
+|4242 4242 4242 4242|Succeeds and immediately processes the payment.                |
+|4000 0000 0000 3220|Complete 3D Secure 2 authentication for a successful payment.  |
+|4000 0000 0000 9995|Always fails with a decline code of insufficient_funds.        |
 
 
