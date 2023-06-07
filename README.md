@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Customer Front-end
+
+Front-end for customer application.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -39,49 +41,44 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+# Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+In order to test and deploy the application on Kubernetes follow these steps:
+- create application Docker image;
+- publish Docker image on registry - for development push the image on your local Kind cluster;
+- run Kubernetes Deployment in the manifest.yml
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
+## Docker cheats
 
 Build Docker image
 ```
 docker build -t customer-frontend .
 ```
 
+## Kind cheats
+
 Push Docker application image into Kind cluster
 ```
 kind load docker-image customer-frontend:latest
 ```
 
+## Kubernetes cheats
+
 Deploy on Kubernetes
 ```
 kubectl create -f manifest.yml
 ```
+
+## Stripe Cheats
+
+Use the followings fake credit cards to test payment gateway transactions.
+
+**Credit Cards**
+
+|Number|Description|
+|---|---|
+|4242 4242 4242 4242|Succeeds and immediately processes the payment.|
+|4000 0000 0000 3220|Complete 3D Secure 2 authentication for a successful payment.|
+|4000 0000 0000 9995|Always fails with a decline code of insufficient_funds.|
+
+
