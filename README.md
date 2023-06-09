@@ -59,15 +59,20 @@ docker build -t customer-frontend .
 
 Push Docker application image into Kind cluster
 ```
-kind load docker-image customer-frontend:latest
+kind load docker-image customer-frontend:latest --name <cluster name>
 ```
 
 ## Kubernetes cheats
 
 Deploy on Kubernetes
 ```
-kubectl create -f manifest.yml
+kubectl create -f manifest.yml --context kind-<cluster name>
+
+*** --context option wants a cluster name starting with the prefix "kind-" ***
+
 ```
+
+
 
 ## Stripe cheats
 
