@@ -60,6 +60,8 @@ docker build -t customer-frontend .
 Push Docker application image into Kind cluster
 ```
 kind load docker-image customer-frontend:latest --name <cluster name>
+
+kind load docker-image customer-frontend:latest --name food-delivery-cluster
 ```
 
 ## Kubernetes cheats
@@ -70,6 +72,7 @@ kubectl create -f manifest.yml --context kind-<cluster name>
 
 *** --context option wants a cluster name starting with the prefix "kind-" ***
 
+kubectl create -f manifest.yml --context kind-food-delivery-cluster
 ```
 
 
@@ -87,3 +90,28 @@ Use the followings fake credit cards to test payment gateway transactions.
 |4000 0000 0000 9995|Always fails with a decline code of insufficient_funds.        |
 
 
+### Checkout Testing
+
+**login**
+
+Use Stripe CLI to login (only first time) and follow pairing instructions. 
+Check the docs at [https://stripe.com/docs/stripe-cli](https://stripe.com/docs/stripe-cli)
+
+**Check stripe status**
+```
+stripe status
+```
+
+**Forward events to local server**
+
+***Local***
+Use this if customer backend is running on local.
+```
+stripe listen --forward-to localhost:5001/api/merchants/webhook
+```
+***Kubernetes***
+Use this if customer backend is running on Kubernetes cluster.
+```
+stripe listen --forward-to 172.19.0.3:30009/api/merchants/webhook
+
+```
