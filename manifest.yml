@@ -1,3 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-app-service
+  labels:
+    app: customer-app
+    service: customer-frontend
+spec:
+  type: NodePort
+  ports:
+    - targetPort : 80
+      port: 80
+      nodePort: 30011
+      protocol: TCP
+  selector:
+    app: customer-app
+    service: customer-frontend
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,21 +45,3 @@ spec:
           #     value: http://merchants-webapi-service
           #   - name: REACT_APP_MERCHANT_KEY
           #     value: 646d246260e60733ad25d50c
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: customer-app-service
-  labels:
-    app: customer-app
-    service: customer-frontend
-spec:
-  type: NodePort
-  ports:
-    - targetPort : 80
-      port: 80
-      nodePort: 30011
-      protocol: TCP
-  selector:
-    app: customer-app
-    service: customer-frontend

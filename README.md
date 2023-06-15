@@ -112,6 +112,6 @@ stripe listen --forward-to localhost:5001/api/merchants/webhook
 ***Kubernetes***
 Use this if customer backend is running on Kubernetes cluster.
 ```
-stripe listen --forward-to 172.19.0.3:30009/api/merchants/webhook
+stripe listen --forward-to food-delivery.lcl:30009/api/merchants/webhook
 
 ```
